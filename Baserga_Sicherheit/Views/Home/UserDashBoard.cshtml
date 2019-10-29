@@ -1,0 +1,92 @@
+﻿@model Baserga_Sicherheit.Models.Ticket
+@{
+    ViewBag.Title = "UserDashBoard";
+}
+@using (Html.BeginForm("UserDashBoard", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <style>
+        .MakeWide {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        }
+    </style>
+
+    <fieldset>
+        <legend> Ticket Bestellung | @Session["UserName"].ToString() </legend>
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Beschreibung, new List<SelectListItem> {
+                       new SelectListItem { Value = "0" , Text = "Wählen Sie ein Event" },
+                       new SelectListItem { Value = "Basketball Spiel" , Text = "Basketball Spiel" },
+                       new SelectListItem { Value = "Lecrae Konzert" , Text = "Lecrae Konzert" },
+                       new SelectListItem { Value = "Fussball Spiel" , Text = "Fussball Spiel" }
+                    },
+                    new { @class = "MakeWide" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Bereich, new List<SelectListItem> {
+                       new SelectListItem { Value = "0" , Text = "Platz Bereich" },
+                       new SelectListItem { Value = "Vorne" , Text = "Vorne" },
+                       new SelectListItem { Value = "Mitte" , Text = "Mitte" },
+                       new SelectListItem { Value = "Hinten" , Text = "Hinten" }
+                    },
+                    new { @class = "MakeWide" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Zahlungsmittel, new List<SelectListItem> {
+                       new SelectListItem { Value = "0" , Text = "Zahlungsmittel" },
+                       new SelectListItem { Value = "Visa" , Text = "Visa" },
+                       new SelectListItem { Value = "Mastercard" , Text = "Mastercard" },
+                       new SelectListItem { Value = "PostCard" , Text = "PostCard" },
+                       new SelectListItem { Value = "Rechnung nach Hause" , Text = "Rechnung nach Hause" }
+                    },
+                    new { @class = "MakeWide" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NameAufTicket, new { htmlAttributes = new { @class = "form-control", placeholder = "Name auf dem Ticket" } })
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "Bitte füllen Sie alle Felder korrekt aus! Der Name auf Ticket darf keine Sonderzeichen enthalten!", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <input type="submit" value="Bestellen" class="btn btn-success" style="margin-left:15px; display:block; top: 50%;" />
+            </div>
+        </div>
+
+    </fieldset>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
