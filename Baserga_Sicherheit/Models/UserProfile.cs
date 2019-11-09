@@ -25,6 +25,7 @@ namespace Baserga_Sicherheit.Models
         [Column(Order = 2)]
         [StringLength(50)]
         [PasswortValidation]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,14}$")]
         public string Password { get; set; }
 
         [Key]
